@@ -38,24 +38,28 @@ if(j == 0){printf("\n\nIncomplete OUTCAR!! bye! bye! \n\n");exit(0);} /*verifica
 
 rewind(outcar);
 do
-fscanf(outcar,"%s",str);                                      /*posiciona o ponteiro após a palavra ISPIN*/
-while(strcmp(str,"ISPIN")!=0);
-fscanf(outcar,"%s",str);        /*pula o =*/
-fscanf(outcar,"%d",&s);        
-
-do
 fscanf(outcar,"%s",str);                                      /*posiciona o ponteiro após a palavra NKPTS*/
 while(strcmp(str,"NKPTS")!=0);
 fscanf(outcar,"%s",str);        /*pula o =*/
 fscanf(outcar,"%d",&nkpt);      /*lê o numero de kpts*/
-
-float a,b[2*nkpt],c[2*nkpt],homo,lumo,occupb[2*nkpt],occupc[2*nkpt],kpoint[3],directgapup[2*nkpt],directgapdown[2*nkpt];
 
 do
 fscanf(outcar,"%s",str);                                      /*posiciona o ponteiro após a palavra NBANDS=*/
 while(strcmp(str,"NBANDS=")!=0);
 
 fscanf(outcar,"%d",&nbands);      /*lê o numero de bandas*/
+
+
+do
+fscanf(outcar,"%s",str);                                      /*posiciona o ponteiro após a palavra ISPIN*/
+while(strcmp(str,"ISPIN")!=0);
+fscanf(outcar,"%s",str);        /*pula o =*/
+fscanf(outcar,"%d",&s);      
+
+
+float a,b[2*nkpt],c[2*nkpt],homo,lumo,occupb[2*nkpt],occupc[2*nkpt],kpoint[3],directgapup[2*nkpt],directgapdown[2*nkpt];
+
+
 
 /*-----------------------------spin----------------------------------------------------------------------------------------------------*/
 if(s==2){
