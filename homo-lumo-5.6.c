@@ -28,12 +28,6 @@ printf("Erro na abertura do arquivo %s\n",str);
 exit(0);
 }
 
-do
-fscanf(outcar,"%s",str);                                      /*posiciona o ponteiro após a palavra ISPIN*/
-while(strcmp(str,"ISPIN")!=0);
-fscanf(outcar,"%s",str);        /*pula o =*/
-fscanf(outcar,"%d",&s);        
-
 nef=0;j=0;
 while (fscanf(outcar,"%s",str) != EOF){
 if(strcmp(str,"E-fermi")==0)nef++;                      /*verifica se o arquivo outcar esta completo e conta qtos e-fermi*/
@@ -43,6 +37,12 @@ if(strcmp(str,"Voluntary")==0)j++;
 if(j == 0){printf("\n\nIncomplete OUTCAR!! bye! bye! \n\n");exit(0);} /*verifica se o calculo terminou corretamente*/
 
 rewind(outcar);
+do
+fscanf(outcar,"%s",str);                                      /*posiciona o ponteiro após a palavra ISPIN*/
+while(strcmp(str,"ISPIN")!=0);
+fscanf(outcar,"%s",str);        /*pula o =*/
+fscanf(outcar,"%d",&s);        
+
 do
 fscanf(outcar,"%s",str);                                      /*posiciona o ponteiro após a palavra NKPTS*/
 while(strcmp(str,"NKPTS")!=0);
